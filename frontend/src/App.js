@@ -6,6 +6,7 @@ import Grades from './pages/Grades';
 import Attendance from './pages/Attendance';
 import Profile from './pages/Profile';
 import Admin from './pages/Admin';
+import AdminStudents from './pages/AdminStudents';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/attendance" element={<Attendance />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/admin/students" element={<AdminStudents />} />
       </Routes>
     </BrowserRouter>
   );
