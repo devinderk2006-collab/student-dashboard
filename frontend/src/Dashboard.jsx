@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, Radar } from 'recharts';
-import { TrendingUp, Award, BookOpen, Star, Target, Activity } from 'lucide-react';
+import { TrendingUp, Award, Star, Target } from 'lucide-react';
 
 const radarData = [
   { subject: 'DevOps', score: 92 },
@@ -10,13 +10,6 @@ const radarData = [
   { subject: 'Algorithms', score: 90 },
   { subject: 'AI/ML', score: 85 },
   { subject: 'Systems', score: 87 },
-];
-
-const achievements = [
-  { icon: '🏆', title: 'Top Performer', desc: 'Semester 2' },
-  { icon: '⭐', title: 'Best in DevOps', desc: 'A+ Grade' },
-  { icon: '📈', title: 'Consistent Growth', desc: '+0.4 CGPA' },
-  { icon: '🎯', title: 'DSA Champion', desc: 'A+ Grade' },
 ];
 
 const gradeColor = (grade) => {
