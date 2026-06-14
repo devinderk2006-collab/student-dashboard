@@ -1,0 +1,27 @@
+name: EduTrack CI/CD Pipeline
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+jobs:
+  test-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Install and build frontend
+        run: cd frontend && npm install && npm run build
+  test-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install backend dependencies
+        run: pip install flask flask-cors flask-sqlalchemy pymysql python-dotenv
+      - name: Check backend syntax
+        run: python -m py_compile backend/app.py && echo "Backend OK!"
