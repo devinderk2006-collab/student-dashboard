@@ -40,7 +40,8 @@ export default function Dashboard() {
     }, 16);
 
     if (stored.student_id) {
-      fetch(`http://127.0.0.1:5000/api/students/${stored.student_id}/subjects`)
+      fetch(`https://student-dashboard-dmy8.onrender.com
+/api/students/${stored.student_id}/subjects`)
         .then(res => res.json())
         .then(data => {
           const sem1 = data.filter(s => s.semester === 1);

@@ -17,7 +17,8 @@ export default function Grades() {
     const user = JSON.parse(localStorage.getItem('user'));
     if (!user) { navigate('/login'); return; }
 
-    fetch(`http://127.0.0.1:5000/api/students/${user.student_id}/subjects`)
+    fetch(`https://student-dashboard-dmy8.onrender.com
+/api/students/${user.student_id}/subjects`)
       .then(res => res.json())
       .then(data => { setSubjects(data); setLoading(false); })
       .catch(() => setLoading(false));
