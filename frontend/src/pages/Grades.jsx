@@ -17,7 +17,7 @@ export default function Grades() {
     const user = JSON.parse(localStorage.getItem('user'));
     if (!user) { navigate('/login'); return; }
 
-    fetch(`https://student-dashboard-dmy8.onrender.com/api/students/${user.student_id}/subjects`)
+    fetch(`https://student-dashboard-production-e19f.up.railway.app/api/students/${user.student_id}/subjects`)
       .then(res => res.json())
       .then(data => { setSubjects(data); setLoading(false); })
       .catch(() => setLoading(false));
