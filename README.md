@@ -115,16 +115,16 @@ Automated GitHub Actions pipeline that:
 ## 📸 Screenshots
 
 ### Login Page
-Clean, modern login with Student/Admin toggle
+![Login Page](screenshots/login.png)
 
 ### Student Dashboard
-Real-time CGPA tracking with beautiful charts
+![Dashboard](screenshots/dashboard.png)
 
 ### Grades Page
-Subject-wise performance with score breakdown
+![Grades](screenshots/grades.png)
 
 ### Admin Panel
-Complete student management system
+![Admin](screenshots/admin.png)
 
 ## 👩‍💻 Author
 **Devinder Kaur**
