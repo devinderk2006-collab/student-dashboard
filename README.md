@@ -4,8 +4,8 @@ A full-stack web application for tracking student academic performance, built wi
 
 ## 🌐 Live Demo
 - **Frontend:** https://effortless-palmier-f735f0.netlify.app
-- **Login (Student):** devinder@stu.upes.ac.in / devinder123
-- **Login (Admin):** admin@upes.ac.in / admin123
+- **Note:** Run backend locally for full demo (see installation guide below)
+- **GitHub:** https://github.com/devinderk2006-collab/student-dashboard
 
 ## ✨ Features
 
