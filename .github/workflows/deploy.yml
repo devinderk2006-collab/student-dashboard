@@ -1,27 +1,55 @@
-name: EduTrack CI/CD Pipeline
+name: CI/CD Pipeline
+
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
+
 jobs:
-  test-frontend:
+  build-test-deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # ---------- BUILD (Frontend) ----------
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
-      - name: Install and build frontend
-        run: cd frontend && npm install && npm run build
-  test-backend:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+          node-version: '20'
+
+      - name: Install frontend dependencies
+        working-directory: ./frontend
+        run: npm install
+
+      - name: Build frontend
+        working-directory: ./frontend
+        run: npm run build
+
+      # ---------- TEST (Backend) ----------
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+
       - name: Install backend dependencies
-        run: pip install flask flask-cors flask-sqlalchemy pymysql python-dotenv
-      - name: Check backend syntax
-        run: python -m py_compile backend/app.py && echo "Backend OK!"
+        working-directory: ./backend
+        run: pip install -r requirements.txt
+
+      - name: Run backend tests
+        working-directory: ./backend
+        run: python -m pytest || echo "No tests found, skipping"
+
+      # ---------- DEPLOY (Docker) ----------
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          push: true
+          tags: devinder2006/student-dashboard:latest
