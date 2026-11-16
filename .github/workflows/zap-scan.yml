@@ -1,0 +1,21 @@
+name: DAST - OWASP ZAP Scan
+
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  zap-baseline:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Run ZAP Baseline Scan
+        uses: zaproxy/action-baseline@v0.14.0
+        with:
+          target: 'https://effortless-palmier-f735f0.netlify.app/'
+          allow_issue_writing: false
+          fail_action: false
+          artifact_name: zap-report
+          cmd_options: '-a'
