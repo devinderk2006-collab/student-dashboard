@@ -1,0 +1,22 @@
+name: Compliance as Code (Conftest)
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  conftest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check Dockerfiles against compliance policy
+        run: |
+          FILES=$(find . -name 'Dockerfile*' -not -path '*/node_modules/*' | sed 's|^\./||')
+          echo "Checking these files:"
+          echo "$FILES"
+          docker run --rm -v "$PWD:/project" openpolicyagent/conftest test --policy policy --output table $FILES
